@@ -1,10 +1,10 @@
 {
-    "name": "yourname/laravel-heymarket",
+    "name": "carpool-logistics/laravel-heymarket",
     "description": "A Laravel package for Heymarket API",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "YourNamespace\\Heymarket\\": "src/"
+            "CarpoolLogistics\\Heymarket\\": "src/"
         }
     },
     "require": {
@@ -14,7 +14,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "YourNamespace\\Heymarket\\HeymarketServiceProvider"
+                "CarpoolLogistics\\Heymarket\\HeymarketServiceProvider"
             ]
         }
     }
