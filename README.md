@@ -45,11 +45,15 @@ class OrderShipped extends Notification
             HeymarketMessage::create()
                 ->to($notifiable->phone_number)
                 ->body('Your order has been shipped!')
-                ->teamId('your_team_id'),
+                ->creatorId('your_creator_id')
+                ->inboxId('your_team_id'),
+             
             HeymarketMessage::create()
                 ->to($notifiable->phone_number)
                 ->body('Your order tracking number is 12345')
-                ->teamId('your_team_id')
+                ->inboxId('your_inbox_id')
+                ->creatorId('your_creator_id')
+                ->mediaUrl('https://images.com/image')
         ];
     }
 }

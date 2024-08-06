@@ -20,6 +20,13 @@ class HeymarketChannel
         }
 
         $message = $notification->toHeymarket($notifiable);
-        $this->client->sendMessage($message->toArray());
+
+        if (is_array($message)) {
+            $this->client->sendMessage(array_map(function ($msg) {
+                return $msg->toArray();
+            }, $message));
+        } else {
+            $this->client->sendMessage($message->toArray());
+        }
     }
 }
