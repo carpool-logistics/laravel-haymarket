@@ -19,106 +19,187 @@ class HeymarketClient
         ]);
     }
 
-    // Contacts
-    public function getContacts()
+    // Contacts Endpoints
+    public function getContacts($params = [])
     {
-        return $this->request('GET', 'contacts');
+        return $this->request('POST', 'contacts', ['json' => $params]);
     }
 
     public function createContact($data)
     {
-        return $this->request('POST', 'contacts', ['json' => $data]);
+        return $this->request('POST', 'contact', ['json' => $data]);
     }
 
     public function getContact($contactId)
     {
-        return $this->request('GET', 'contacts/' . $contactId);
+        return $this->request('GET', 'contact/' . $contactId);
     }
 
     public function updateContact($contactId, $data)
     {
-        return $this->request('PUT', 'contacts/' . $contactId, ['json' => $data]);
+        return $this->request('PUT', 'contact/' . $contactId, ['json' => $data]);
     }
 
     public function deleteContact($contactId)
     {
-        return $this->request('DELETE', 'contacts/' . $contactId);
+        return $this->request('DELETE', 'contact/' . $contactId);
     }
 
-    // Messages
-    public function getMessages()
+    public function getContactFields($params = [])
     {
-        return $this->request('GET', 'messages');
+        return $this->request('POST', 'contact-fields', ['json' => $params]);
     }
 
-    public function createMessage($data)
+    public function getContactStatus($params)
     {
-        return $this->request('POST', 'messages', ['json' => $data]);
+        return $this->request('POST', 'contact/status', ['json' => $params]);
     }
 
-    public function getMessage($messageId)
+    public function setContactStatus($params)
     {
-        return $this->request('GET', 'messages/' . $messageId);
+        return $this->request('POST', 'contact/set_status', ['json' => $params]);
     }
 
-    public function deleteMessage($messageId)
+    public function createBatchContacts($contacts, $overwrite = false)
     {
-        return $this->request('DELETE', 'messages/' . $messageId);
+        return $this->request('POST', 'batch/contacts', ['json' => $contacts, 'query' => ['overwrite' => $overwrite]]);
     }
 
-    // Teams
-    public function getTeams()
+    // Messages Endpoints
+    public function getMessages($phoneNumber, $inboxId, $timestamp = null)
     {
-        return $this->request('GET', 'teams');
+        $query = [
+            'phoneNumber' => $phoneNumber,
+            'inboxID' => $inboxId,
+        ];
+        if ($timestamp) {
+            $query['timestamp'] = $timestamp;
+        }
+        return $this->request('GET', 'messages', ['query' => $query]);
     }
 
-    public function createTeam($data)
+    public function getAllMessages($params = [])
     {
-        return $this->request('POST', 'teams', ['json' => $data]);
+        return $this->request('POST', 'messages/all', ['json' => $params]);
     }
 
-    public function getTeam($teamId)
+    public function sendMessage($data)
     {
-        return $this->request('GET', 'teams/' . $teamId);
+        return $this->request('POST', 'message/send', ['json' => $data]);
     }
 
-    public function updateTeam($teamId, $data)
+    // Inboxes Endpoints
+    public function getInboxes()
     {
-        return $this->request('PUT', 'teams/' . $teamId, ['json' => $data]);
+        return $this->request('GET', 'inboxes');
     }
 
-    public function deleteTeam($teamId)
+    // Users Endpoints
+    public function getUsers($params)
     {
-        return $this->request('DELETE', 'teams/' . $teamId);
+        return $this->request('GET', 'users/get', ['json' => $params]);
     }
 
-    // Tags
-    public function getTags()
+    public function updateUser($params)
     {
-        return $this->request('GET', 'tags');
+        return $this->request('POST', 'users/update', ['json' => $params]);
     }
 
-    public function createTag($data)
+    // Teams Endpoints
+    public function getTeam()
     {
-        return $this->request('POST', 'tags', ['json' => $data]);
+        return $this->request('GET', 'team');
     }
 
-    public function getTag($tagId)
+    // Conversations Endpoints
+    public function getConversations($params)
     {
-        return $this->request('GET', 'tags/' . $tagId);
+        return $this->request('POST', 'conversations', ['json' => $params]);
     }
 
-    public function updateTag($tagId, $data)
+    public function markConversationRead($params)
     {
-        return $this->request('PUT', 'tags/' . $tagId, ['json' => $data]);
+        return $this->request('POST', 'conversations/read', ['json' => $params]);
     }
 
-    public function deleteTag($tagId)
+    public function markConversationUnread($params)
     {
-        return $this->request('DELETE', 'tags/' . $tagId);
+        return $this->request('POST', 'conversations/unread', ['json' => $params]);
     }
 
-    // Request Helper
+    public function reassignConversation($params)
+    {
+        return $this->request('POST', 'conversations/reassign', ['json' => $params]);
+    }
+
+    public function openConversation($params)
+    {
+        return $this->request('POST', 'conversations/open', ['json' => $params]);
+    }
+
+    public function closeConversation($params)
+    {
+        return $this->request('POST', 'conversations/close', ['json' => $params]);
+    }
+
+    public function transferConversation($params)
+    {
+        return $this->request('POST', 'conversations/transfer', ['json' => $params]);
+    }
+
+    // Lists Endpoints
+    public function createList($data)
+    {
+        return $this->request('POST', 'list', ['json' => $data]);
+    }
+
+    public function getList($listId)
+    {
+        return $this->request('GET', 'list/' . $listId);
+    }
+
+    public function updateList($listId, $data)
+    {
+        return $this->request('PUT', 'list/' . $listId, ['json' => $data]);
+    }
+
+    public function deleteList($listId)
+    {
+        return $this->request('DELETE', 'list/' . $listId);
+    }
+
+    public function getAllLists($params = [])
+    {
+        return $this->request('POST', 'lists', ['json' => $params]);
+    }
+
+    // Templates Endpoints
+    public function getTemplates($params = [])
+    {
+        return $this->request('POST', 'templates', ['json' => $params]);
+    }
+
+    public function createTemplate($data)
+    {
+        return $this->request('POST', 'template', ['json' => $data]);
+    }
+
+    public function getTemplate($templateId)
+    {
+        return $this->request('GET', 'template/' . $templateId);
+    }
+
+    public function updateTemplate($templateId, $data)
+    {
+        return $this->request('PUT', 'template/' . $templateId, ['json' => $data]);
+    }
+
+    public function deleteTemplate($templateId)
+    {
+        return $this->request('DELETE', 'template/' . $templateId);
+    }
+
+    // Helper function to make requests
     protected function request($method, $uri, $options = [])
     {
         $response = $this->http->request($method, $uri, $options);

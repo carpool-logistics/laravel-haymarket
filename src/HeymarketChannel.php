@@ -20,6 +20,6 @@ class HeymarketChannel
         }
 
         $message = $notification->toHeymarket($notifiable);
-        $this->client->createMessage($message);
+        $this->client->sendMessage($message->toArray());
     }
 }
