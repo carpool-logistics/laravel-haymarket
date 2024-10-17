@@ -15,6 +15,7 @@ class HeymarketClient
             'headers' => [
                 'Authorization' => 'Bearer ' . $apiKey,
                 'Accept' => 'application/json',
+                'Content-Type' => 'application/json'
             ]
         ]);
     }
