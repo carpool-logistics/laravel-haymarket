@@ -71,9 +71,9 @@ class HeymarketMessage
         return [
             'phone_number' => $this->to,
             'text' => $this->body,
-            'inbox_id' => $this->inboxId ?: config('heymarket.default_inbox_id'),
+            'inbox_id' => (int) $this->inboxId ?: (int) config('heymarket.default_inbox_id'),
             'media_url' => $this->mediaUrl,
-            'creator_id' => $this->creatorId ?: config('heymarket.default_creator_id')
+            'creator_id' => (int) $this->creatorId ?: (int) config('heymarket.default_creator_id')
         ];
     }
 }
