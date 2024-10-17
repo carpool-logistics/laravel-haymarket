@@ -97,7 +97,7 @@ class HeymarketClient
     // Users Endpoints
     public function getUsers($params)
     {
-        return $this->request('GET', 'users/get', ['json' => $params]);
+        return $this->request('GET', 'users/get', [$params]);
     }
 
     public function updateUser($params)
