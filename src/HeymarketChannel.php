@@ -2,6 +2,7 @@
 
 namespace CarpoolLogistics\Heymarket;
 
+use App\Notifications\Plivo\Exceptions\CouldNotSendNotification;
 use Illuminate\Notifications\Notification;
 
 class HeymarketChannel
@@ -28,5 +29,17 @@ class HeymarketChannel
         } else {
             $this->client->sendMessage($message->toArray());
         }
+
+        if (! empty($message->additionalContent)) {
+            foreach ($message->additionalContent as $content) {
+                $this->client->sendMessage([
+                    'phone_number' => $message->to,
+                    'text' => $content,
+                    'inbox_id' => (int) $message->inboxId ?: (int) config('heymarket.default_inbox_id'),
+                    'creator_id' => (int) $message->creatorId ?: (int) config('heymarket.default_creator_id')
+                ]);
+            }
+        }
+
     }
 }

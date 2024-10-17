@@ -2,6 +2,8 @@
 
 namespace CarpoolLogistics\Heymarket;
 
+use App\Notifications\Plivo\PlivoMessage;
+
 class HeymarketMessage
 {
     public $to;
@@ -9,6 +11,7 @@ class HeymarketMessage
     public $inboxId;
     public $creatorId;
     public $mediaUrl;
+    public $additionalContent = [];
 
     public static function create()
     {
@@ -25,6 +28,16 @@ class HeymarketMessage
     {
         $this->body = $body;
         return $this;
+    }
+
+
+    public function additionalContent($content)
+    {
+
+        $this->additionalContent = array_merge($this->additionalContent, $content);
+
+        return $this;
+
     }
 
     public function mediaUrl($mediaUrl)
