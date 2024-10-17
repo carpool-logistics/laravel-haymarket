@@ -45,6 +45,12 @@ class HeymarketMessage
         return $this;
     }
 
+    public function creatorEmail($email){
+
+
+
+    }
+
     public function toArray()
     {
         return [

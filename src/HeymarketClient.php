@@ -3,20 +3,20 @@
 namespace CarpoolLogistics\Heymarket;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 
 class HeymarketClient
 {
     protected $http;
 
+    private $apiKey;
+
     public function __construct($apiKey)
     {
+        $this->apiKey = $apiKey;
+
         $this->http = new Client([
-            'base_uri' => 'https://api.heymarket.com/v1/',
-            'headers' => [
-                'Authorization' => 'Bearer ' . $apiKey,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ]
+            'base_uri' => 'https://api.heymarket.com/v1/'
         ]);
     }
 
@@ -203,7 +203,17 @@ class HeymarketClient
     // Helper function to make requests
     protected function request($method, $uri, $options = [])
     {
-        $response = $this->http->request($method, $uri, $options);
-        return json_decode($response->getBody(), true);
+
+        $headers =  [
+                'Authorization' => 'Bearer ' . $this->apiKey,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json'
+        ];
+
+        $request = new Request($method, $uri, $headers, json_encode($options));
+        $res = $this->http->sendAsync($request)->wait();
+        return json_decode($res->getBody());
+
+
     }
 }
