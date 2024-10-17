@@ -23,12 +23,12 @@ class HeymarketClient
     // Contacts Endpoints
     public function getContacts($params = [])
     {
-        return $this->request('POST', 'contacts', ['json' => $params]);
+        return $this->request('POST', 'contacts', $params);
     }
 
     public function createContact($data)
     {
-        return $this->request('POST', 'contact', ['json' => $data]);
+        return $this->request('POST', 'contact', $data);
     }
 
     public function getContact($contactId)
@@ -38,7 +38,7 @@ class HeymarketClient
 
     public function updateContact($contactId, $data)
     {
-        return $this->request('PUT', 'contact/' . $contactId, ['json' => $data]);
+        return $this->request('PUT', 'contact/' . $contactId, $data);
     }
 
     public function deleteContact($contactId)
@@ -48,17 +48,17 @@ class HeymarketClient
 
     public function getContactFields($params = [])
     {
-        return $this->request('POST', 'contact-fields', ['json' => $params]);
+        return $this->request('POST', 'contact-fields', $params);
     }
 
     public function getContactStatus($params)
     {
-        return $this->request('POST', 'contact/status', ['json' => $params]);
+        return $this->request('POST', 'contact/status', $params);
     }
 
     public function setContactStatus($params)
     {
-        return $this->request('POST', 'contact/set_status', ['json' => $params]);
+        return $this->request('POST', 'contact/set_status', $params);
     }
 
     public function createBatchContacts($contacts, $overwrite = false)
@@ -76,17 +76,17 @@ class HeymarketClient
         if ($timestamp) {
             $query['timestamp'] = $timestamp;
         }
-        return $this->request('GET', 'messages', ['query' => $query]);
+        return $this->request('GET', 'messages', $query);
     }
 
     public function getAllMessages($params = [])
     {
-        return $this->request('POST', 'messages/all', ['json' => $params]);
+        return $this->request('POST', 'messages/all', $params);
     }
 
     public function sendMessage($data)
     {
-        return $this->request('POST', 'message/send', ['json' => $data]);
+        return $this->request('POST', 'message/send', $data);
     }
 
     // Inboxes Endpoints
@@ -103,7 +103,7 @@ class HeymarketClient
 
     public function updateUser($params)
     {
-        return $this->request('POST', 'users/update', ['json' => $params]);
+        return $this->request('POST', 'users/update', $params);
     }
 
     // Teams Endpoints
@@ -115,43 +115,43 @@ class HeymarketClient
     // Conversations Endpoints
     public function getConversations($params)
     {
-        return $this->request('POST', 'conversations', ['json' => $params]);
+        return $this->request('POST', 'conversations', $params);
     }
 
     public function markConversationRead($params)
     {
-        return $this->request('POST', 'conversations/read', ['json' => $params]);
+        return $this->request('POST', 'conversations/read', $params);
     }
 
     public function markConversationUnread($params)
     {
-        return $this->request('POST', 'conversations/unread', ['json' => $params]);
+        return $this->request('POST', 'conversations/unread', $params);
     }
 
     public function reassignConversation($params)
     {
-        return $this->request('POST', 'conversations/reassign', ['json' => $params]);
+        return $this->request('POST', 'conversations/reassign', $params);
     }
 
     public function openConversation($params)
     {
-        return $this->request('POST', 'conversations/open', ['json' => $params]);
+        return $this->request('POST', 'conversations/open', $params);
     }
 
     public function closeConversation($params)
     {
-        return $this->request('POST', 'conversations/close', ['json' => $params]);
+        return $this->request('POST', 'conversations/close', $params);
     }
 
     public function transferConversation($params)
     {
-        return $this->request('POST', 'conversations/transfer', ['json' => $params]);
+        return $this->request('POST', 'conversations/transfer', $params);
     }
 
     // Lists Endpoints
     public function createList($data)
     {
-        return $this->request('POST', 'list', ['json' => $data]);
+        return $this->request('POST', 'list', $data);
     }
 
     public function getList($listId)
@@ -161,7 +161,7 @@ class HeymarketClient
 
     public function updateList($listId, $data)
     {
-        return $this->request('PUT', 'list/' . $listId, ['json' => $data]);
+        return $this->request('PUT', 'list/' . $listId, $data);
     }
 
     public function deleteList($listId)
@@ -171,18 +171,18 @@ class HeymarketClient
 
     public function getAllLists($params = [])
     {
-        return $this->request('POST', 'lists', ['json' => $params]);
+        return $this->request('POST', 'lists', $params);
     }
 
     // Templates Endpoints
     public function getTemplates($params = [])
     {
-        return $this->request('POST', 'templates', ['json' => $params]);
+        return $this->request('POST', 'templates', $params);
     }
 
     public function createTemplate($data)
     {
-        return $this->request('POST', 'template', ['json' => $data]);
+        return $this->request('POST', 'template', $data);
     }
 
     public function getTemplate($templateId)
@@ -192,7 +192,7 @@ class HeymarketClient
 
     public function updateTemplate($templateId, $data)
     {
-        return $this->request('PUT', 'template/' . $templateId, ['json' => $data]);
+        return $this->request('PUT', 'template/' . $templateId, $data);
     }
 
     public function deleteTemplate($templateId)

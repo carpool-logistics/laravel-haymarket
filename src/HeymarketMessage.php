@@ -17,7 +17,7 @@ class HeymarketMessage
 
     public function to($to)
     {
-        $this->to = $to;
+        $this->to = str_replace('+', '', $to);
         return $this;
     }
 
@@ -47,6 +47,21 @@ class HeymarketMessage
 
     public function creatorEmail($email){
 
+        try {
+
+            $client = new HeymarketClient(config('heymarket.api_key'));
+            $params = ['email' => [$email]];
+            $users = $client->getUsers($params);
+            if (isset($users->memberships[0])) {
+                $this->creatorId = $users->memberships[0]->id;
+            }
+
+            return $this;
+
+        }
+        catch (\Throwable $e){
+            return $this;
+        }
 
 
     }
